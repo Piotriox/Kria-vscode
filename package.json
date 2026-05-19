@@ -1,0 +1,35 @@
+{
+  "name": "kria",
+  "displayName": "Kria Programming Language",
+  "description": "Extension for Kria",
+  "version": "1.0.0",
+  "icon": "kria.png",
+  "engines": {
+    "vscode": "^1.120.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "kria",
+      "aliases": ["Kria", "kria"],
+      "extensions": [".krx"],
+      "icon": {
+        "light": "./kria-ico.png",
+        "dark": "./kria-ico.png"
+      },
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "kria",
+      "scopeName": "source.kria",
+      "path": "./syntaxes/kria.tmLanguage.json"
+    }],
+    "themes": [{
+      "label": "Kria Dark",
+      "uiTheme": "vs-dark",
+      "path": "./themes/kria-dark.json"
+    }]
+  }
+}

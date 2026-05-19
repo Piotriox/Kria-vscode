@@ -1,0 +1,75 @@
+{
+	"name": "Kria Dark",
+	"type": "dark",
+	"colors": {
+		"editor.background": "#1e1e1e",
+		"editor.foreground": "#d4d4d4",
+		"editor.lineNumberColor": "#858585",
+		"editor.selectionBackground": "#264f78",
+		"editorCursor.foreground": "#aeafad"
+	},
+	"tokenColors": [
+		{
+			"name": "Comment",
+			"scope": "comment.line.kria",
+			"settings": {
+				"foreground": "#6B7280",
+				"fontStyle": "italic"
+			}
+		},
+		{
+			"name": "Keywords",
+			"scope": "keyword.control.kria",
+			"settings": {
+				"foreground": "#4C78FF",
+				"fontStyle": "bold"
+			}
+		},
+		{
+			"name": "Built-in Functions",
+			"scope": "support.function.builtin.kria",
+			"settings": {
+				"foreground": "#FF9F43",
+				"fontStyle": "bold"
+			}
+		},
+		{
+			"name": "Strings",
+			"scope": "string.quoted.double.kria",
+			"settings": {
+				"foreground": "#7BD88F"
+			}
+		},
+		{
+			"name": "String Escape",
+			"scope": "constant.character.escape.kria",
+			"settings": {
+				"foreground": "#7BD88F",
+				"fontStyle": "bold"
+			}
+		},
+		{
+			"name": "Numbers",
+			"scope": "constant.numeric.kria",
+			"settings": {
+				"foreground": "#6EC1FF",
+				"fontStyle": "bold"
+			}
+		},
+		{
+			"name": "Booleans & Null",
+			"scope": "constant.language.kria",
+			"settings": {
+				"foreground": "#A78BFA",
+				"fontStyle": "bold"
+			}
+		},
+		{
+			"name": "Operators",
+			"scope": "keyword.operator.kria",
+			"settings": {
+				"foreground": "#A0AEC0"
+			}
+		}
+	]
+}
