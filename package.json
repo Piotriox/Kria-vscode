@@ -3,6 +3,7 @@
   "displayName": "Kria Programming Language",
   "description": "Extension for Kria",
   "version": "1.0.0",
+  "publisher": "Piotriox",
   "icon": "kria.png",
   "engines": {
     "vscode": "^1.120.0"
