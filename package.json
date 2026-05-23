@@ -6,7 +6,7 @@
   "publisher": "Piotriox",
   "icon": "kria.png",
   "engines": {
-    "vscode": "^1.120.0"
+    "vscode": "^1.1.0"
   },
   "categories": [
     "Programming Languages"
