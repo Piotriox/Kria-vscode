@@ -1,0 +1,83 @@
+print("=== Basic Functions ===")
+
+fn add(a, b) {
+    return a + b
+}
+
+fn multiply(x, y) {
+    return x * y
+}
+
+fn greet(name) {
+    print("Hello, ")
+    print(name)
+}
+
+print("Addition: ")
+print(add(5, 3))
+
+print("Multiplication: ")
+print(multiply(4, 7))
+
+greet("Kria")
+
+fn calculate(x, y) {
+    set sum = x + y
+    set product = x * y
+    set difference = x - y
+    return sum + product + difference
+}
+
+print("Complex calculation: ")
+print(calculate(10, 5))
+
+fn get_max(a, b) {
+    if (a > b) {
+        return a
+    } else {
+        return b
+    }
+}
+
+print("Maximum: ")
+print(get_max(15, 8))
+
+fn is_even(n) {
+    set remainder = n / 2
+    set remainder = n - (remainder * 2)
+    if (remainder == 0) {
+        return true
+    } else {
+        return false
+    }
+}
+
+print("Is 15 even? ")
+print(is_even(15))
+
+print("Is 20 even? ")
+print(is_even(20))
+
+set double = fn(x) {
+    return x * 2
+}
+
+print("Anonymous function (double): ")
+print(double(10))
+
+set power_of_three = fn(n) {
+    return n * n * n
+}
+
+print("Cube: ")
+print(power_of_three(5))
+
+set create_multiplier = fn(factor) {
+    return fn(x) {
+        return x * factor
+    }
+}
+
+set times_three = create_multiplier(3)
+print("Multiply by 3: ")
+print(times_three(7))

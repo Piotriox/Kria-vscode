@@ -1,0 +1,127 @@
+{
+  "Function Definition": {
+    "prefix": "fn",
+    "body": [
+      "fn ${1:functionName}(${2:parameters}) {",
+      "\t$3",
+      "\treturn $4",
+      "}"
+    ],
+    "description": "Define a function"
+  },
+  "While Loop": {
+    "prefix": "while",
+    "body": [
+      "while (${1:condition}) {",
+      "\t$2",
+      "}"
+    ],
+    "description": "While loop"
+  },
+  "For-In Loop": {
+    "prefix": "for",
+    "body": [
+      "for ${1:item} in ${2:array} {",
+      "\t$3",
+      "}"
+    ],
+    "description": "For-in loop for arrays"
+  },
+  "If Statement": {
+    "prefix": "if",
+    "body": [
+      "if (${1:condition}) {",
+      "\t$2",
+      "}"
+    ],
+    "description": "If statement"
+  },
+  "If-Else Statement": {
+    "prefix": "ifelse",
+    "body": [
+      "if (${1:condition}) {",
+      "\t$2",
+      "} else {",
+      "\t$3",
+      "}"
+    ],
+    "description": "If-else statement"
+  },
+  "Variable Declaration": {
+    "prefix": "set",
+    "body": [
+      "set ${1:variableName} = ${2:value}"
+    ],
+    "description": "Declare a variable"
+  },
+  "String Input": {
+    "prefix": "inputstr",
+    "body": [
+      "set ${1:variable} = input<str>(\"${2:prompt}\")"
+    ],
+    "description": "Get string input from user"
+  },
+  "Integer Input": {
+    "prefix": "inputint",
+    "body": [
+      "set ${1:variable} = input<int>(\"${2:prompt}\")"
+    ],
+    "description": "Get integer input from user"
+  },
+  "Float Input": {
+    "prefix": "inputfloat",
+    "body": [
+      "set ${1:variable} = input<float>(\"${2:prompt}\")"
+    ],
+    "description": "Get float input from user"
+  },
+  "Print Statement": {
+    "prefix": "print",
+    "body": [
+      "print(${1:value})"
+    ],
+    "description": "Print to console"
+  },
+  "Array": {
+    "prefix": "arr",
+    "body": [
+      "set ${1:arrayName} = [${2:1, 2, 3}]"
+    ],
+    "description": "Create a mutable array"
+  },
+  "Immutable Array": {
+    "prefix": "immarr",
+    "body": [
+      "set ${1:arrayName} = #[${2:1, 2, 3}]"
+    ],
+    "description": "Create an immutable array"
+  },
+  "Object": {
+    "prefix": "obj",
+    "body": [
+      "set ${1:objectName} = { ${2:key}: \"${3:value}\" }"
+    ],
+    "description": "Create an object"
+  },
+  "Push to Array": {
+    "prefix": "push",
+    "body": [
+      "push(${1:array}, ${2:value})"
+    ],
+    "description": "Add element to array"
+  },
+  "Pop from Array": {
+    "prefix": "pop",
+    "body": [
+      "set ${1:variable} = pop(${2:array})"
+    ],
+    "description": "Remove last element from array"
+  },
+  "Remove Property": {
+    "prefix": "rmv",
+    "body": [
+      "rmv(${1:object.property})"
+    ],
+    "description": "Remove property from object"
+  }
+}

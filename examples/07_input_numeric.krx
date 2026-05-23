@@ -1,0 +1,49 @@
+print("=== Numeric Input Examples ===")
+
+set number = input<int>("Enter an integer:")
+print("Number you entered: ")
+print(number)
+
+print("Difference with 10:")
+print(number - 10)
+
+print("Double the number:")
+set doubled = number * 2
+print(doubled)
+
+set a = input<int>("First number:")
+set b = input<int>("Second number:")
+
+set total = a + b
+print("Sum: ")
+print(total)
+
+set product = a * b
+print("Product: ")
+print(product)
+
+set float_num = input<float>("Enter a decimal number:")
+print("Decimal number you entered: ")
+print(float_num)
+
+set float_doubled = float_num * 2
+print("Double: ")
+print(float_doubled)
+
+set base = input<int>("Enter base:")
+set exp = input<int>("Enter exponent:")
+
+set result = base * base
+set counter = 2
+while (counter < exp) {
+    set result = result * base
+    set counter = counter + 1
+}
+print("Result: ")
+print(result)
+
+set x = input<float>("First decimal:")
+set y = input<float>("Second decimal:")
+
+print("Their sum: ")
+print(x + y)

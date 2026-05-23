@@ -27,10 +27,9 @@
       "scopeName": "source.kria",
       "path": "./syntaxes/kria.tmLanguage.json"
     }],
-    "themes": [{
-      "label": "Kria Dark",
-      "uiTheme": "vs-dark",
-      "path": "./themes/kria-dark.json"
+    "snippets": [{
+      "language": "kria",
+      "path": "./snippets/kria.json"
     }]
   }
 }

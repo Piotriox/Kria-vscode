@@ -12,7 +12,10 @@
 			"include": "#builtins"
 		},
 		{
-			"include": "#operators"
+			"include": "#arrays"
+		},
+		{
+			"include": "#objects"
 		},
 		{
 			"include": "#strings"
@@ -22,6 +25,12 @@
 		},
 		{
 			"include": "#booleans"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#generics"
 		}
 	],
 	"repository": {
@@ -37,7 +46,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.kria",
-					"match": "\\b(if|else|while|fn|set|return)\\b"
+					"match": "\\b(if|else|while|for|in|fn|set|return|break|continue)\\b"
 				}
 			]
 		},
@@ -45,7 +54,94 @@
 			"patterns": [
 				{
 					"name": "support.function.builtin.kria",
-					"match": "\\b(print|input)\\b"
+					"match": "\\b(print|input|push|pop|rmv)\\b"
+				},
+				{
+					"name": "support.other.kria",
+					"match": "\\.(length)\\b"
+				}
+			]
+		},
+		"generics": {
+			"patterns": [
+				{
+					"name": "entity.name.type.kria",
+					"match": "<(str|int|float)>"
+				}
+			]
+		},
+		"arrays": {
+			"patterns": [
+				{
+					"name": "meta.array.kria",
+					"begin": "\\[",
+					"end": "\\]",
+					"patterns": [
+						{
+							"include": "#numbers"
+						},
+						{
+							"include": "#strings"
+						},
+						{
+							"include": "#booleans"
+						}
+					]
+				},
+				{
+					"name": "meta.array.immutable.kria",
+					"begin": "#\\[",
+					"end": "\\]",
+					"patterns": [
+						{
+							"include": "#numbers"
+						},
+						{
+							"include": "#strings"
+						},
+						{
+							"include": "#booleans"
+						}
+					]
+				},
+				{
+					"name": "meta.array.access.kria",
+					"match": "\\[\\s*\\d+\\s*\\]"
+				}
+			]
+		},
+		"objects": {
+			"patterns": [
+				{
+					"name": "meta.object.kria",
+					"begin": "\\{",
+					"end": "\\}",
+					"patterns": [
+						{
+							"name": "variable.other.kria",
+							"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*:"
+						},
+						{
+							"include": "#strings"
+						},
+						{
+							"include": "#numbers"
+						},
+						{
+							"include": "#booleans"
+						},
+						{
+							"include": "#arrays"
+						}
+					]
+				},
+				{
+					"name": "meta.object.property.kria",
+					"match": "\\.(\\w+)"
+				},
+				{
+					"name": "meta.object.bracket.access.kria",
+					"match": "\\[\\s*['\"]\\w+['\"]\\s*\\]"
 				}
 			]
 		},
