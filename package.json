@@ -2,11 +2,11 @@
   "name": "kria",
   "displayName": "Kria Programming Language",
   "description": "Extension for Kria",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "Piotriox",
   "icon": "kria.png",
   "engines": {
-    "vscode": "^1.1.0"
+    "vscode": "^1.120.0"
   },
   "categories": [
     "Programming Languages"
