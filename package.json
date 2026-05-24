@@ -1,15 +1,19 @@
 {
   "name": "kria",
   "displayName": "Kria Programming Language",
-  "description": "Extension for Kria",
-  "version": "1.1.0",
+  "description": "Extension for Kria with syntax highlighting, IDE features (hover, go to definition, autocomplete)",
+  "version": "1.3.0",
   "publisher": "Piotriox",
   "icon": "kria.png",
+  "main": "./out/extension.js",
   "engines": {
-    "vscode": "^1.120.0"
+    "vscode": "^1.75.0"
   },
   "categories": [
     "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:kria"
   ],
   "contributes": {
     "languages": [{
@@ -31,5 +35,16 @@
       "language": "kria",
       "path": "./snippets/kria.json"
     }]
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.75.0",
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "vscode:prepublish": "npm run compile"
   }
 }

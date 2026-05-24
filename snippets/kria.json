@@ -123,5 +123,38 @@
       "rmv(${1:object.property})"
     ],
     "description": "Remove property from object"
+  },
+  "For-In Object Loop": {
+    "prefix": "forobj",
+    "body": [
+      "for ${1:key}, ${2:value} in ${3:object} {",
+      "\t$4",
+      "}"
+    ],
+    "description": "For-in loop for objects (key-value pairs)"
+  },
+  "Export Function": {
+    "prefix": "expfn",
+    "body": [
+      "export fn ${1:functionName}(${2:parameters}) {",
+      "\t$3",
+      "\treturn $4",
+      "}"
+    ],
+    "description": "Export a function"
+  },
+  "Import Module": {
+    "prefix": "imp",
+    "body": [
+      "import ${1:moduleName} from \"${2:./path.krx}\""
+    ],
+    "description": "Import a module"
+  },
+  "Import All": {
+    "prefix": "impall",
+    "body": [
+      "import * as ${1:name} from \"${2:./path.krx}\""
+    ],
+    "description": "Import all exports from module"
   }
 }

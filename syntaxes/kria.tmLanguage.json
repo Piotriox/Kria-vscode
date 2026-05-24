@@ -9,6 +9,12 @@
 			"include": "#keywords"
 		},
 		{
+			"include": "#for-in-object"
+		},
+		{
+			"include": "#array-assignment"
+		},
+		{
 			"include": "#builtins"
 		},
 		{
@@ -46,7 +52,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.kria",
-					"match": "\\b(if|else|while|for|in|fn|set|return|break|continue)\\b"
+					"match": "\\b(if|else|while|for|in|fn|set|return|break|continue|export|import|from)\\b"
 				}
 			]
 		},
@@ -181,6 +187,30 @@
 				{
 					"name": "constant.language.kria",
 					"match": "\\b(true|false|null)\\b"
+				}
+			]
+		},
+		"for-in-object": {
+			"patterns": [
+				{
+					"name": "meta.for-in-object.kria",
+					"match": "\\bfor\\s+(\\w+)\\s*,\\s*(\\w+)\\s+in\\b",
+					"captures": {
+						"1": { "name": "variable.other.kria" },
+						"2": { "name": "variable.other.kria" }
+					}
+				}
+			]
+		},
+		"array-assignment": {
+			"patterns": [
+				{
+					"name": "meta.array.assignment.kria",
+					"match": "(\\w+)\\[(\\d+)\\]\\s*=",
+					"captures": {
+						"1": { "name": "variable.other.kria" },
+						"2": { "name": "constant.numeric.kria" }
+					}
 				}
 			]
 		}

@@ -1,8 +1,18 @@
 # Kria Programming Language - VS Code Extension
 
-VS Code extension providing syntax highlighting and language support for Kria programming language.
+VS Code extension providing syntax highlighting, language support, and professional IDE features for Kria programming language.
 
 ## Features
+
+### IDE Features ⭐
+
+- **Hover Information** - Hover over functions, keywords, and variables to see documentation and type information
+- **Go to Definition** - Press `Ctrl+Click` on any function or variable to jump to its definition
+- **IntelliSense / Autocomplete** - Get smart code suggestions while typing
+  - Type `prin` → Suggests `print()`
+  - Type `arr.` → Suggests `push`, `pop`, `length`
+  - Type `input<` → Suggests `str`, `int`, `float`
+  - Type `for` → Suggests loop templates
 
 ### Syntax Highlighting
 - **Keywords** - `if`, `else`, `while`, `for`, `in`, `fn`, `set`, `return`, `break`, `continue`
@@ -29,20 +39,19 @@ VS Code extension providing syntax highlighting and language support for Kria pr
 Quick templates for common code patterns:
 - `fn` - Function definition
 - `while` - While loop
-- `for` - For-in loop
+- `for` - For-in loop (arrays)
+- `forobj` - For-in loop (objects)
 - `if` - If statement
 - `ifelse` - If-else statement
 - `set` - Variable declaration
-- `inputstr` - String input
-- `inputint` - Integer input
-- `inputfloat` - Float input
+- `inputstr`, `inputint`, `inputfloat` - User input
 - `print` - Print statement
-- `arr` - Array creation
-- `immarr` - Immutable array
+- `arr`, `immarr` - Array creation
 - `obj` - Object creation
-- `push` - Push to array
-- `pop` - Pop from array
-- `rmv` - Remove property
+- `push`, `pop`, `rmv` - Array/Object operations
+- `expfn` - Export function
+- `imp` - Import module
+- `impall` - Import all exports
 
 ## Installation
 
