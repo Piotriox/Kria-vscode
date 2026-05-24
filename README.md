@@ -4,7 +4,7 @@ VS Code extension providing syntax highlighting, language support, and professio
 
 ## Features
 
-### IDE Features ⭐
+### IDE Features
 
 - **Hover Information** - Hover over functions, keywords, and variables to see documentation and type information
 - **Go to Definition** - Press `Ctrl+Click` on any function or variable to jump to its definition
@@ -62,10 +62,6 @@ Quick templates for common code patterns:
 ## File Extension
 
 Save your Kria code with the `.krx` extension.
-
-## Requirements
-
-- VS Code 1.120.0 or newer
 
 ## License
 
