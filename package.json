@@ -1,10 +1,19 @@
 {
   "name": "kria",
   "displayName": "Kria Programming Language",
-  "description": "Extension for Kria with syntax highlighting, IDE features (hover, go to definition, autocomplete)",
-  "version": "1.3.0",
+  "description": "Professional IDE features for Kria: syntax highlighting, diagnostics, formatting, autocomplete, and more",
+  "version": "1.4.0",
   "publisher": "Piotriox",
   "icon": "kria.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kria-Labs/kria-vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/Kria-Labs/kria-vscode/issues"
+  },
+  "homepage": "https://github.com/Kria-Labs/kria-vscode/blob/main/README.md",
+  "license": "MIT",
   "main": "./out/extension.js",
   "engines": {
     "vscode": "^1.75.0"

@@ -19,6 +19,11 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
     const beforeCursor = line.substring(0, position.character);
     const items: vscode.CompletionItem[] = [];
 
+    // Context: Import paths (inside import statement)
+    if (beforeCursor.includes('import') && (beforeCursor.includes('from') || beforeCursor.includes('"') || beforeCursor.includes("'"))) {
+      return this.getImportPathCompletions(document, beforeCursor);
+    }
+
     // Context: Array methods (after arr.)
     if (beforeCursor.match(/\w+\.$/)) {
       return this.getArrayCompletions();
@@ -137,6 +142,63 @@ export class CompletionProvider implements vscode.CompletionItemProvider {
       const item = new vscode.CompletionItem(type.name, type.kind);
       item.documentation = type.documentation;
       items.push(item);
+    }
+
+    return items;
+  }
+
+  /**
+   * Get import path completion items for .krx files
+   */
+  private getImportPathCompletions(document: vscode.TextDocument, beforeCursor: string): vscode.CompletionItem[] {
+    const items: vscode.CompletionItem[] = [];
+
+    // Extract current path from import statement
+    const pathMatch = beforeCursor.match(/from\s+["']([^"']*)$/);
+    if (!pathMatch) {
+      // Show initial path suggestions
+      const item = new vscode.CompletionItem('./', vscode.CompletionItemKind.Folder);
+      item.detail = 'Current directory';
+      items.push(item);
+
+      const parentItem = new vscode.CompletionItem('../', vscode.CompletionItemKind.Folder);
+      parentItem.detail = 'Parent directory';
+      items.push(parentItem);
+
+      return items;
+    }
+
+    const currentPath = pathMatch[1];
+    const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+    if (!workspaceFolder) return items;
+
+    try {
+      const fs = require('fs');
+      const path = require('path');
+
+      const baseDir = currentPath.startsWith('../') ? workspaceFolder.uri.fsPath : workspaceFolder.uri.fsPath;
+      const fullPath = path.join(baseDir, currentPath);
+      const dirPath = currentPath.endsWith('/') ? fullPath : path.dirname(fullPath);
+
+      if (fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
+        const files = fs.readdirSync(dirPath);
+
+        for (const file of files) {
+          const filePath = path.join(dirPath, file);
+          const stats = fs.statSync(filePath);
+
+          if (stats.isDirectory()) {
+            const item = new vscode.CompletionItem(file + '/', vscode.CompletionItemKind.Folder);
+            items.push(item);
+          } else if (file.endsWith('.krx')) {
+            const item = new vscode.CompletionItem(file, vscode.CompletionItemKind.File);
+            item.detail = 'Kria module';
+            items.push(item);
+          }
+        }
+      }
+    } catch (error) {
+      // Silently fail if fs operations don't work
     }
 
     return items;

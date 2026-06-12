@@ -31,6 +31,18 @@ export const BUILTIN_FUNCTIONS = {
     documentation: 'Remove a property from an object',
     kind: vscode.CompletionItemKind.Function,
     snippet: 'rmv(${1:object.property})'
+  },
+  type: {
+    signature: 'type(value: any): string',
+    documentation: 'Get the type of a value. Returns "number", "string", "boolean", "array", "object", or "null"',
+    kind: vscode.CompletionItemKind.Function,
+    snippet: 'type(${1:value})'
+  },
+  wait: {
+    signature: 'wait(milliseconds: number): void',
+    documentation: 'Pause execution for the specified number of milliseconds',
+    kind: vscode.CompletionItemKind.Function,
+    snippet: 'wait(${1:1000})'
   }
 };
 
@@ -46,6 +58,10 @@ export const KEYWORDS = {
   },
   else: {
     documentation: 'Else clause for if statement. Use: else { ... }',
+    kind: vscode.CompletionItemKind.Keyword
+  },
+  elseif: {
+    documentation: 'Else if clause for conditional statements. Use: elseif (condition) { ... }',
     kind: vscode.CompletionItemKind.Keyword
   },
   while: {

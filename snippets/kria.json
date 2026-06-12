@@ -47,6 +47,19 @@
     ],
     "description": "If-else statement"
   },
+  "If-Elseif-Else Statement": {
+    "prefix": "ifelseif",
+    "body": [
+      "if (${1:condition1}) {",
+      "\t$2",
+      "} elseif (${3:condition2}) {",
+      "\t$4",
+      "} else {",
+      "\t$5",
+      "}"
+    ],
+    "description": "If-elseif-else statement"
+  },
   "Variable Declaration": {
     "prefix": "set",
     "body": [
@@ -124,6 +137,20 @@
     ],
     "description": "Remove property from object"
   },
+  "Get Type": {
+    "prefix": "type",
+    "body": [
+      "type(${1:value})"
+    ],
+    "description": "Get the type of a value"
+  },
+  "Wait": {
+    "prefix": "wait",
+    "body": [
+      "wait(${1:1000})"
+    ],
+    "description": "Pause execution for milliseconds"
+  },
   "For-In Object Loop": {
     "prefix": "forobj",
     "body": [
@@ -132,6 +159,165 @@
       "}"
     ],
     "description": "For-in loop for objects (key-value pairs)"
+  },
+  "Try-Catch Block": {
+    "prefix": "try",
+    "body": [
+      "try {",
+      "\t$1",
+      "} catch {",
+      "\t$2",
+      "}"
+    ],
+    "description": "Try-catch error handling"
+  },
+  "Switch-Case Block": {
+    "prefix": "switch",
+    "body": [
+      "set result = case ${1:value} {",
+      "\t${2:pattern1} => $3,",
+      "\t${4:pattern2} => $5,",
+      "\t_ => $6",
+      "}"
+    ],
+    "description": "Switch-case statement"
+  },
+  "Early Return": {
+    "prefix": "guard",
+    "body": [
+      "if (${1:condition}) {",
+      "\treturn ${2:value}",
+      "}"
+    ],
+    "description": "Early return guard clause"
+  },
+  "Ternary Operator": {
+    "prefix": "ternary",
+    "body": [
+      "set ${1:result} = if (${2:condition}) { ${3:value1} } else { ${4:value2} }"
+    ],
+    "description": "Ternary conditional expression"
+  },
+  "Object Iteration": {
+    "prefix": "iterobj",
+    "body": [
+      "for key, value in ${1:object} {",
+      "\tprint(\"\\${key}: \\${value}\")",
+      "}"
+    ],
+    "description": "Iterate over object key-value pairs"
+  },
+  "Array Iteration": {
+    "prefix": "iterarr",
+    "body": [
+      "for item in ${1:array} {",
+      "\tprint(item)",
+      "}"
+    ],
+    "description": "Iterate over array items"
+  },
+  "Function with Return Type": {
+    "prefix": "fnret",
+    "body": [
+      "fn ${1:functionName}(${2:param}: ${3:type}): ${4:returnType} {",
+      "\t$5",
+      "\treturn ${6:result}",
+      "}"
+    ],
+    "description": "Function with type annotations"
+  },
+  "Nested Function": {
+    "prefix": "fnested",
+    "body": [
+      "fn ${1:outerFunction}() {",
+      "\tfn ${2:innerFunction}() {",
+      "\t\t$3",
+      "\t}",
+      "\t$4",
+      "}"
+    ],
+    "description": "Function containing nested function"
+  },
+  "Multi-line String": {
+    "prefix": "str3",
+    "body": [
+      "set ${1:text} = \"\"\"",
+      "${2:multi-line}",
+      "${3:string content}",
+      "\"\"\""
+    ],
+    "description": "Multi-line string literal"
+  },
+  "Block Comment": {
+    "prefix": "cmt",
+    "body": [
+      "/*",
+      " * ${1:comment}",
+      " */"
+    ],
+    "description": "Block comment"
+  },
+  "Type Check": {
+    "prefix": "typeof",
+    "body": [
+      "set ${1:varType} = type(${2:variable})"
+    ],
+    "description": "Check type of variable"
+  },
+  "Delay Execution": {
+    "prefix": "delay",
+    "body": [
+      "wait(${1:1000})",
+      "$2"
+    ],
+    "description": "Add delay with wait()"
+  },
+  "Object Property Access": {
+    "prefix": "prop",
+    "body": [
+      "${1:object}.${2:property}"
+    ],
+    "description": "Access object property"
+  },
+  "Array Element Access": {
+    "prefix": "elem",
+    "body": [
+      "${1:array}[${2:0}]"
+    ],
+    "description": "Access array element"
+  },
+  "Modify Array Element": {
+    "prefix": "setelement",
+    "body": [
+      "${1:array}[${2:0}] = ${3:value}"
+    ],
+    "description": "Modify array element at index"
+  },
+  "Inline Conditional": {
+    "prefix": "ifcond",
+    "body": [
+      "if (${1:condition}) { ${2:action} }"
+    ],
+    "description": "Single-line if statement"
+  },
+  "Lambda-like Anonymous Function": {
+    "prefix": "anon",
+    "body": [
+      "set ${1:func} = fn(${2:param}) { return ${3:result} }"
+    ],
+    "description": "Anonymous function"
+  },
+  "Recursive Function": {
+    "prefix": "fnrec",
+    "body": [
+      "fn ${1:recursive}(${2:n}) {",
+      "\tif (${3:n} <= 1) {",
+      "\t\treturn ${4:base}",
+      "\t}",
+      "\treturn ${5:recursive}(${2:n} - 1)",
+      "}"
+    ],
+    "description": "Recursive function template"
   },
   "Export Function": {
     "prefix": "expfn",

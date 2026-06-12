@@ -1,6 +1,7 @@
 node_modules/
 out/
 examples/
+kria-examples/
 *.vsix
 .env
 .DS_Store
