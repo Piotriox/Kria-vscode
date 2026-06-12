@@ -21,7 +21,7 @@ Professional IDE extension for Kria programming language with syntax highlightin
   - Type `import` → Suggests `.krx` files in directory
   - Type `for` → Suggests loop templates
   - Type `ifelse` → Suggests if-else templates
-- **Code Diagnostics & Linting** ⚡ - Real-time error detection
+- **Code Diagnostics & Linting** - Real-time error detection
   - Undefined functions and variables warnings
   - Bracket matching and validation
   - Type error detection (invalid input types)
