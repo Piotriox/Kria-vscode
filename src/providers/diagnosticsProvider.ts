@@ -30,60 +30,16 @@ export class DiagnosticsProvider {
     // Built-in functions that don't need definitions
     const builtins = new Set(['print', 'input', 'push', 'pop', 'rmv', 'type', 'wait']);
 
-    // Check each line for issues
+    // Check brackets globally (across all lines)
+    const bracketIssues = this.checkBracketsGlobal(text, lines);
+    diagnostics.push(...bracketIssues);
+
+    // Check each line for other issues
     lines.forEach((line, lineIndex) => {
       // Skip comments
       if (line.trim().startsWith('//') || line.trim().startsWith('/*')) {
         return;
       }
-
-      // Check for undefined variables in assignments and function calls
-      const variablePattern = /\b([a-zA-Z_][a-zA-Z0-9_]*)\b/g;
-      let match;
-
-      while ((match = variablePattern.exec(line)) !== null) {
-        const name = match[1];
-        const position = match.index;
-
-        // Skip keywords
-        const keywords = ['set', 'if', 'elseif', 'else', 'while', 'for', 'in', 'fn', 'return', 
-                         'break', 'continue', 'export', 'import', 'from', 'true', 'false', 'null'];
-        if (keywords.includes(name)) continue;
-
-        // Skip if it's a property access (after dot)
-        if (position > 0 && line[position - 1] === '.') continue;
-
-        // Check if it's being defined (after 'set' keyword)
-        const beforeName = line.substring(0, position).trim();
-        if (beforeName.endsWith('set')) continue;
-
-        // Check if it's being defined (function definition with 'fn')
-        if (beforeName.endsWith('fn')) continue;
-
-        // Check if it's a reference to undefined function/variable
-        if (!functionNames.has(name) && !variableNames.has(name) && !builtins.has(name)) {
-          // Only warn if it looks like a function call or variable reference
-          if (position + name.length < line.length && line[position + name.length] === '(') {
-            // It's a function call
-            const range = new vscode.Range(
-              new vscode.Position(lineIndex, position),
-              new vscode.Position(lineIndex, position + name.length)
-            );
-            const diagnostic = new vscode.Diagnostic(
-              range,
-              `Undefined function '${name}'`,
-              vscode.DiagnosticSeverity.Error
-            );
-            diagnostic.source = 'Kria Linter';
-            diagnostic.code = 'undefined-function';
-            diagnostics.push(diagnostic);
-          }
-        }
-      }
-
-      // Check for mismatched brackets
-      const bracketIssues = this.checkBrackets(line, lineIndex);
-      diagnostics.push(...bracketIssues);
 
       // Check for type mismatches in input statements
       const inputTypeIssues = this.checkInputTypes(line, lineIndex);
@@ -113,49 +69,98 @@ export class DiagnosticsProvider {
     this.diagnosticCollection.set(document.uri, diagnostics);
   }
 
-  private checkBrackets(line: string, lineIndex: number): vscode.Diagnostic[] {
+  private checkBracketsGlobal(text: string, lines: string[]): vscode.Diagnostic[] {
     const diagnostics: vscode.Diagnostic[] = [];
-    const stack: Array<{ char: string; index: number }> = [];
+    const stack: Array<{ char: string; line: number; col: number }> = [];
+    let inString = false;
+    let inBlockComment = false;
 
-    for (let i = 0; i < line.length; i++) {
-      const char = line[i];
+    for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+      const line = lines[lineIndex];
 
-      if (char === '{' || char === '(' || char === '[') {
-        stack.push({ char, index: i });
-      } else if (char === '}' || char === ')' || char === ']') {
-        if (stack.length === 0) {
-          const range = new vscode.Range(
-            new vscode.Position(lineIndex, i),
-            new vscode.Position(lineIndex, i + 1)
-          );
-          const diagnostic = new vscode.Diagnostic(
-            range,
-            `Unmatched closing bracket '${char}'`,
-            vscode.DiagnosticSeverity.Error
-          );
-          diagnostic.source = 'Kria Linter';
-          diagnostics.push(diagnostic);
-        } else {
-          const last = stack[stack.length - 1];
-          const matches = (last.char === '{' && char === '}') ||
-                         (last.char === '(' && char === ')') ||
-                         (last.char === '[' && char === ']');
-          if (!matches) {
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        const nextChar = i + 1 < line.length ? line[i + 1] : '';
+
+        // Handle block comments
+        if (!inString && char === '/' && nextChar === '*') {
+          inBlockComment = true;
+          i++;
+          continue;
+        }
+        if (inBlockComment && char === '*' && nextChar === '/') {
+          inBlockComment = false;
+          i++;
+          continue;
+        }
+        if (inBlockComment) continue;
+
+        // Handle strings
+        if (char === '"' && (i === 0 || line[i - 1] !== '\\')) {
+          inString = !inString;
+          continue;
+        }
+        if (inString) continue;
+
+        // Handle single-line comments
+        if (char === '/' && nextChar === '/') break;
+
+        // Track brackets
+        if (char === '{' || char === '(' || char === '[') {
+          stack.push({ char, line: lineIndex, col: i });
+        } else if (char === '}' || char === ')' || char === ']') {
+          if (stack.length === 0) {
             const range = new vscode.Range(
               new vscode.Position(lineIndex, i),
               new vscode.Position(lineIndex, i + 1)
             );
             const diagnostic = new vscode.Diagnostic(
               range,
-              `Mismatched bracket: expected '${last.char === '{' ? '}' : last.char === '(' ? ')' : ']'}' but got '${char}'`,
+              `Unmatched closing bracket '${char}'`,
               vscode.DiagnosticSeverity.Error
             );
             diagnostic.source = 'Kria Linter';
             diagnostics.push(diagnostic);
           } else {
-            stack.pop();
+            const last = stack[stack.length - 1];
+            const matches = (last.char === '{' && char === '}') ||
+                           (last.char === '(' && char === ')') ||
+                           (last.char === '[' && char === ']');
+            if (!matches) {
+              const range = new vscode.Range(
+                new vscode.Position(lineIndex, i),
+                new vscode.Position(lineIndex, i + 1)
+              );
+              const diagnostic = new vscode.Diagnostic(
+                range,
+                `Mismatched bracket: expected '${last.char === '{' ? '}' : last.char === '(' ? ')' : ']'}' but got '${char}'`,
+                vscode.DiagnosticSeverity.Error
+              );
+              diagnostic.source = 'Kria Linter';
+              diagnostics.push(diagnostic);
+            } else {
+              stack.pop();
+            }
           }
         }
+      }
+    }
+
+    // Report unclosed brackets at end of file
+    if (stack.length > 0) {
+      for (const unclosed of stack) {
+        const range = new vscode.Range(
+          new vscode.Position(unclosed.line, unclosed.col),
+          new vscode.Position(unclosed.line, unclosed.col + 1)
+        );
+        const closeChar = unclosed.char === '{' ? '}' : unclosed.char === '(' ? ')' : ']';
+        const diagnostic = new vscode.Diagnostic(
+          range,
+          `Unclosed bracket '${unclosed.char}'. Expected '${closeChar}'`,
+          vscode.DiagnosticSeverity.Error
+        );
+        diagnostic.source = 'Kria Linter';
+        diagnostics.push(diagnostic);
       }
     }
 

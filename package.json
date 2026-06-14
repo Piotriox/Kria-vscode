@@ -2,7 +2,7 @@
   "name": "kria",
   "displayName": "Kria Programming Language",
   "description": "Professional IDE features for Kria: syntax highlighting, diagnostics, formatting, autocomplete, and more",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "publisher": "Piotriox",
   "icon": "kria.png",
   "repository": {

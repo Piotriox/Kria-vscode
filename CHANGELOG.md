@@ -4,6 +4,11 @@ All notable changes to the "kria" extension will be documented in this file.
 
 ## [1.4.0] - 2026-06-12
 
+### Fixed
+- Bracket linter fixed
+
+## [1.4.0] - 2026-06-12
+
 ### Added
 - Diagnostics provider for real-time code analysis
   - Undefined function and variable detection
